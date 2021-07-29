@@ -245,6 +245,16 @@ app.post("/order", async (req, res) => {
           },
         ],
       },
+      "Applied Coupon": {
+        rich_text: [
+          {
+            type: "string",
+            text: {
+              content: req.body.coupon,
+            },
+          },
+        ],
+      },
     },
   });
 
