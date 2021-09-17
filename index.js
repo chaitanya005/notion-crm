@@ -108,9 +108,14 @@ app.get("/getNotion", async (req, res) => {
 });
 
 app.post("/order", async (req, res) => {
-  console.log("requesting--------------------------------", req.body.values);
+  console.log(
+    "requesting--------------------------------",
+    req.body.values,
+    req.body.orderId
+  );
   // res.send(req.body);
   const databaseId = "746cbc16c13a4c2a959cd6b81033983f";
+
   const response = await notion.pages.create({
     parent: {
       database_id: databaseId,
@@ -119,10 +124,11 @@ app.post("/order", async (req, res) => {
       "Order Id": {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.orderId,
             },
+            // mention: "",
           },
         ],
       },
@@ -138,7 +144,7 @@ app.post("/order", async (req, res) => {
       Email: {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.email,
             },
@@ -148,7 +154,7 @@ app.post("/order", async (req, res) => {
       "Phone Number": {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.phone,
             },
@@ -158,7 +164,7 @@ app.post("/order", async (req, res) => {
       Address: {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.address,
             },
@@ -168,7 +174,7 @@ app.post("/order", async (req, res) => {
       "Pin Code": {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.pincode,
             },
@@ -178,7 +184,7 @@ app.post("/order", async (req, res) => {
       Town: {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.town,
             },
@@ -188,7 +194,7 @@ app.post("/order", async (req, res) => {
       District: {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.district,
             },
@@ -208,7 +214,7 @@ app.post("/order", async (req, res) => {
       "No of Items": {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.i.toString(),
             },
@@ -218,7 +224,7 @@ app.post("/order", async (req, res) => {
       Items: {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.items,
             },
@@ -228,7 +234,7 @@ app.post("/order", async (req, res) => {
       "Additional Info": {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.values.additionInfo,
             },
@@ -238,7 +244,7 @@ app.post("/order", async (req, res) => {
       Total: {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.total.toString(),
             },
@@ -248,7 +254,7 @@ app.post("/order", async (req, res) => {
       "Applied Coupon": {
         rich_text: [
           {
-            type: "string",
+            type: "text",
             text: {
               content: req.body.coupon,
             },
@@ -258,7 +264,7 @@ app.post("/order", async (req, res) => {
     },
   });
 
-  console.log(response);
+  // console.log("response-------------------------------------", response);
 
   res.send(response);
 });
